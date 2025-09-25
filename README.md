@@ -9,7 +9,7 @@ Diabetes is a growing global health challenge, and early detection of at-risk in
 This project addresses these challenges by:
 Comparing classical ML models with deep learning approaches.
 Improving efficiency using lightweight methods.
-Applying explainability techniques (SHAP, LIME) to highlight the most important health factors.
+Applying explainability techniques to highlight the most important health factors.
 Delivering a Streamlit web app for real-time risk prediction with explanations.
 
 🎯 Objectives
