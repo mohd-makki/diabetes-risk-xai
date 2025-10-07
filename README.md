@@ -42,7 +42,6 @@ Libraries: scikit-learn, TensorFlow/Keras, XGBoost, SHAP, LIME, Streamlit, panda
 ---
 
 📂 Repository Structure
-diabetes-risk-xai/
 
 │── data/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_# Dataset or download instructions_
 
