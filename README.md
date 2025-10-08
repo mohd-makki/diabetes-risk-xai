@@ -60,7 +60,6 @@ Diabetes).
 
 &nbsp;&nbsp;
 =======
-## Repository Structure
 
 
 ## Repository Structure
