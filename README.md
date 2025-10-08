@@ -57,13 +57,13 @@ Diabetes).
 
 ---
 
-<<<<<<< HEAD
-## Repository Structure
-=======
-📂 Repository Structure
->>>>>>> 98c1632d8881d4b7a555919c6d5d01128eb1c1d3
+&nbsp;&nbsp;
 
-│── data/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+## Repository Structure
+
+&nbsp;
+
+── data/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;_# Dataset or download instructions_
 
