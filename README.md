@@ -57,11 +57,11 @@ Diabetes).
 
 ---
 
-<<<<<<< HEAD
+
 &nbsp;&nbsp;
 =======
 ## Repository Structure
->>>>>>> update-readme
+
 
 ## Repository Structure
 
