@@ -1,0 +1,17 @@
+numpy>=1.23
+pandas>=1.5
+scikit-learn>=1.1
+matplotlib>=3.5
+seaborn>=0.12
+jupyterlab>=3.4
+notebook>=6.5
+ipykernel
+tensorflow>=2.10
+xgboost>=1.7
+shap>=0.41
+lime>=0.2.0.1
+streamlit>=1.15
+joblib
+imbalanced-learn>=0.9
+black
+flake8

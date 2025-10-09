@@ -1,11 +1,16 @@
 {
     "cSpell.words": [
         "explainability",
+        "ipykernel",
+        "joblib",
+        "jupyterlab",
         "Keras",
         "matplotlib",
+        "numpy",
         "scikit",
         "seaborn",
         "SHAP",
-        "Streamlit"
+        "Streamlit",
+        "xgboost"
     ]
 }
