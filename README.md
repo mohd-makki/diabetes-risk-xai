@@ -1,4 +1,4 @@
-# diabetes-risk-xai
+# Diabetes Risk Prediction with Explainable AI (XAI)
 
 Efficient and explainable AI for diabetes risk prediction (capstone project).
 
@@ -13,10 +13,13 @@ diabetes risk, with a focus on efficiency and explainability.
 
 ## Project Overview
 
-Diabetes is a growing global health challenge, and early detection of at-risk
-individuals is essential for prevention. While AI models have shown promise in
-disease prediction, many are computationally heavy and function as “black
-boxes”, limiting their real-world adoption in healthcare.
+This project aims to build an interpretable machine learning system that
+predicts the risk of diabetes based on clinical data.
+Using Explainable AI (XAI) techniques like SHAP and LIME, the goal is not only  
+to achieve accurate predictions but also to make model decisions transparent  
+and understandable for healthcare professionals and patients.
+The project is developed to demonstrate end-to-end AI model development,  
+from data collection to real-world deployment.
 
 This project addresses these challenges by:
 
@@ -50,51 +53,129 @@ Diabetes).
 
 ## Tech Stack
 
-- **Languages & Tools:** Python, Jupyter Notebook, GitHub
-- **Libraries&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** scikit-learn, TensorFlow/Keras,
-  XGBoost, SHAP, LIME, Streamlit, pandas, matplotlib, seaborn
+- **Languages &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Python
+- **Libraries&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:**
+    scikit-learn, TensorFlow/Keras,
+  XGBoost, SHAP, LIME, Streamlit, NumPy, Pandas, MatPlotLib, Seaborn
+- **Environment&nbsp;&nbsp;&nbsp;&nbsp;:** JupyterNotebook + VS Code
+- **Version Control:** Git / GitHub
+
+---
+
+## Project Milestones
+
+**Milestone 1** — Problem Identification & Data Collection
+
+*Objective:* \
+Define the problem, justify dataset selection, and perform a preliminary study  
+ on diabetes prediction.
+
+*Deliverables:*  
+
+- Project overview and motivation
+- Dataset selection rationale
+- Description of data source (Pima Indians Diabetes dataset)
+
+**Milestone 2** — Data Exploration & Baseline Modeling  
+
+*Objective:*
+Explore data, visualize feature relationships, and build a baseline predictive
+model.
+
+*Deliverables:*  
+
+- Jupyter notebook with EDA and data cleaning
+- Baseline logistic regression model
+- Performance metrics and confusion matrix
+
+**Milestone 3** — Explainable AI (XAI) Integration
+
+*Objective:*
+Implement and interpret model predictions using SHAP and LIME for transparency.
+
+*Deliverables:*
+
+- XAI integration notebook
+- SHAP summary plots and LIME explanations
+- Discussion on interpretability insights
+
+**Milestone 4** — Model Tuning & Improvement
+
+*Objective:*
+
+optimize model performance using hyperparameter tuning and ensemble methods
+(combining multiple models  to improve prediction accuracy and reduce errors.).
+
+*Deliverables:*
+
+- Updated notebook with model tuning
+- Comparative evaluation of baseline vs tuned models
+- Final model selection rationale
+
+**Milestone 5** — Deployment (Streamlit App)
+
+*Objective:*
+
+Deploy an interactive Streamlit web app that enables users to input data
+and view diabetes risk predictions with SHAP/LIME visualizations.
+
+*Deliverables:*
+
+- Streamlit app script (app.py)
+- Example user interface screenshots
+- Deployment guide
+
+**Milestone 6** — Final Report & Documentation
+
+*Objective:*
+
+Compile all results, findings, and visualizations into a cohesive final report  
+and presentation.
+
+*Deliverables:*
+
+- Comprehensive technical report
+- Slide deck for project defense
+- Updated README and GitHub documentation
 
 ---
 
 ## Repository Structure
 
-│── data/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+│── data/
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;_# Dataset or download instructions_
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*# Raw & processed data*  
+│&nbsp;&nbsp;&nbsp;&nbsp;   └── pima.csv
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-│── notebooks/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_# Jupyter notebooks (EDA, models,
-results)_
+│── notebooks/  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp; *# Jupyter notebooks for analysis*  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 01_exploration.ipynb
 
-│── src/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;_# Python scripts (preprocessing, training,
-explainability)_
+├── models/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*# Saved models and scalers*  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── xgb_final_model.joblib
 
-│── app/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;_# Streamlit app code_
-
+│── app/  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;*# Streamlit app code*  
+│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── app.py  
 │── results/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_# Metrics,
-plots, SHAP/LIME visuals_
-
-│── README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;_# Project overview_
-
-│── requirements.txt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-_# Python dependencies_
+*# Metrics, plots, SHAP/LIME visuals*  
+│── src/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;*# Utility scripts (data prep, evaluation)*  
+│── README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+*# Project overview*  
+│── requirements.txt&nbsp;&nbsp;&nbsp;&nbsp;  
+└── LICENSE
 
 ---
 
-## Deliverables
+## Future Enhancements
 
-- Comparative analysis of ML and DL models.
-- SHAP/LIME visualizations of feature importance.
-- Efficiency benchmarks (model size, runtime).
-- Streamlit app for interactive prediction + explanation.
-- Final research report (capstone submission).
+- Integrate more clinical datasets for improved generalization.
+- Explore federated learning to ensure data privacy.
+- Extend app with patient-specific treatment recommendations.
 
 ---
 
