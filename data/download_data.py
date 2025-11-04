@@ -20,7 +20,7 @@ cols = [
     "BMI",
     "DiabetesPedigree",
     "Age",
-    "Outcome"
+    "Outcome",
 ]
 
 # Load and save dataset
@@ -30,3 +30,20 @@ print("✅ Dataset downloaded successfully!")
 print("Saved as: data/pima.csv")
 print("Shape:", df.shape)
 print(df.head())
+
+# --- Quick integrity check ---
+print("\n🔍 Quick Data Integrity Check:")
+print("Number of missing values per column:")
+print(df.isnull().sum())
+
+# Check for basic stats (helps verify numeric ranges)
+print("\nSummary statistics:")
+print(df.describe())
+
+# Check for duplicate rows
+duplicates = df.duplicated().sum()
+print(f"\nDuplicate rows: {duplicates}")
+
+if duplicates > 0:
+    print("Consider removing duplicates for cleaner data.")
+# End of script
