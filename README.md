@@ -44,7 +44,7 @@ This project addresses these challenges by:
 
 ## DatasetSource
 
-**Source&nbsp;&nbsp;&nbsp;:** Pima Indians Diabetes Database (UCI).  
+**Source&nbsp;&nbsp;&nbsp;:** Pima Indians Diabetes Database (UCI). / openml.org and
 **Features:** 8 medical and lifestyle factors (e.g., Glucose, BMI, Age).  
 **Target&nbsp;&nbsp;&nbsp;&nbsp;:** Binary classification (Diabetes / No
 Diabetes).
