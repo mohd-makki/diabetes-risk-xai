@@ -1,0 +1,70 @@
+baseline_metrics.txt 📄 
+
+===========================================
+BASELINE MODEL PERFORMANCE COMPARISON
+===========================================
+
+Dataset split: train/test using sklearn.model_selection.train_test_split
+Preprocessing: StandardScaler applied to numeric features
+
+-------------------------------------------
+Logistic Regression (Baseline Model)
+-------------------------------------------
+Accuracy: 0.7078
+ROC AUC : 0.8130
+
+Classification Report:
+               precision    recall  f1-score   support
+           0       0.75      0.82      0.78       100
+           1       0.60      0.50      0.55        54
+    accuracy                           0.71       154
+   macro avg       0.68      0.66      0.67       154
+weighted avg       0.70      0.71      0.70       154
+
+Confusion Matrix:
+[[82 18]
+ [27 27]]
+
+Saved preprocessing objects & baseline model:
+✅ scaler.joblib
+✅ logreg_baseline.joblib
+Stored in: ../models/
+
+-------------------------------------------
+Random Forest Classifier
+-------------------------------------------
+Accuracy: 0.7468
+ROC AUC : 0.8237
+
+Classification Report:
+               precision    recall  f1-score   support
+           0       0.85      0.74      0.79       100
+           1       0.61      0.76      0.68        54
+    accuracy                           0.75       154
+   macro avg       0.73      0.75      0.73       154
+weighted avg       0.77      0.75      0.75       154
+
+Confusion Matrix:
+[[74 26]
+ [13 41]]
+
+-------------------------------------------
+XGBoost Classifier (Final Baseline)
+-------------------------------------------
+Accuracy: 0.7468
+ROC AUC : 0.8281
+
+Classification Report:
+               precision    recall  f1-score   support
+           0       0.80      0.82      0.81       100
+           1       0.65      0.61      0.63        54
+    accuracy                           0.75       154
+   macro avg       0.72      0.72      0.72       154
+weighted avg       0.74      0.75      0.75       154
+
+Confusion Matrix:
+[[82 18]
+ [21 33]]
+
+✅ Final XGBoost model saved in ../models/
+===========================================

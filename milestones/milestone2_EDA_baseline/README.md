@@ -39,4 +39,5 @@ distributions and correlations with diabetes outcomes.
 ## Output Location 📤
 
 - notebooks/01_exploration.ipynb
-- models/baseline_model.joblib, models/xgb_model.joblib
+- The baseline models used in this phase are stored in the global models/  
+  directory.

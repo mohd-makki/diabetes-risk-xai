@@ -1,13 +1,13 @@
-# Milestone 6 — Final Report & Documentation
+# Milestone 6 📁 — Final Report & Documentation
 
-## Objective
+## Objective 🎯
 
 Compile the final report, presentation, and GitHub documentation for submission
 and evaluation.
 
 ---
 
-## Description
+## Description 📝
 
 The final milestone consolidates all work into a professional research and  
 implementation report.
@@ -16,7 +16,7 @@ implications and limitations.
 
 ---
 
-## Key Tasks
+## Key Tasks 🛠️
 
 1. Write final technical and research report (PDF).
 2. Prepare presentation slides for academic defense.
@@ -24,7 +24,7 @@ implications and limitations.
 
 ---
 
-## Deliverables
+## Deliverables 📦
 
 - final_report.pdf
 - presentation_slides.pptx
@@ -32,7 +32,7 @@ implications and limitations.
 
 ---
 
-## Output Location
+## Output Location 📤
 
 - reports/
 - Root-level README.md

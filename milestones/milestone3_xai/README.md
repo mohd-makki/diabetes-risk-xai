@@ -1,13 +1,13 @@
-# Milestone 3 — Explainable AI (XAI) Integration
+# Milestone 3 🧭 — Explainable AI (XAI) Integration
 
-## Objective
+## Objective 🎯
 
 Integrate interpretability tools to enhance model transparency and explain  
 predictions made by the trained ML models.
 
 ---
 
-## Description
+## Description 📝
 
 This milestone applies **SHAP** and **LIME** explainability frameworks to  
 visualize and interpret model predictions.
@@ -16,7 +16,7 @@ fairness and transparency in predictions.
 
 ---
 
-## Key Tasks
+## Key Tasks 🛠️
 
 1. Implement SHAP global and local explanations.
 2. Apply LIME for instance-level interpretability.
@@ -24,7 +24,7 @@ fairness and transparency in predictions.
 
 ---
 
-## Deliverables
+## Deliverables 📦
 
 - **SHAP** and **LIME** plots (saved in results/).
 - Jupyter Notebook with visual explanations.
@@ -32,7 +32,7 @@ fairness and transparency in predictions.
 
 ---
 
-## Output Location
+## Output Location 📤
 
 - notebooks/02_explainability.ipynb
 - results/shap_summary.png, results/lime_explanations.png

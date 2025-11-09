@@ -1,13 +1,13 @@
-# Milestone 5 — Deployment & Streamlit App
+# Milestone 5 🚀 — Deployment & Streamlit App
 
-## Objective
+## Objective 🎯
 
 Deploy the final model into a user-friendly Streamlit application with
 integrated explainability tools.
 
 ---
 
-## Description
+## Description 📝
 
 This milestone delivers a functional Streamlit web app where users can input  
 health metrics, receive predictions, and view SHAP/LIME-based explanations for  
@@ -15,7 +15,7 @@ each case.
 
 ---
 
-## Key Tasks
+## Key Tasks 🛠️
 
 1. Design the Streamlit UI for model prediction.
 2. Integrate the saved model and XAI visualizations.
@@ -23,7 +23,7 @@ each case.
 
 ---
 
-## Deliverables
+## Deliverables 📦
 
 - app/streamlit_app.py (main interface).
 - Screenshots or demo video of app usage.
@@ -31,7 +31,7 @@ each case.
 
 ---
 
-## Output Location
+## Output Location 📤
 
 - app/
 - results/streamlit_screenshots/
