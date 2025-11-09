@@ -1,4 +1,4 @@
-# Diabetes Risk Prediction with Explainable AI (XAI)
+# Diabetes Risk Prediction with Explainable AI (XAI) 🩺
 
 Efficient and explainable AI for diabetes risk prediction (capstone project).
 
@@ -11,64 +11,63 @@ diabetes risk, with a focus on efficiency and explainability.
 
 ---
 
-## Project Overview
+## Project Overview 🧭
 
 This project aims to build an interpretable machine learning system that
 predicts the risk of diabetes based on clinical data.
-Using Explainable AI (XAI) techniques like SHAP and LIME, the goal is not only  
+the project combines predictive models (Logistic Regression, Random Forest,
+XGBoost) with Explainable AI (XAI) techniques such as **SHAP** and **LIME**
+to help clinicians understand *why* predictions are made. the goal is not only  
 to achieve accurate predictions but also to make model decisions transparent  
 and understandable for healthcare professionals and patients.
 The project is developed to demonstrate end-to-end AI model development,  
 from data collection to real-world deployment.
 
-This project addresses these challenges by:
+## Project Objectives 🎯
 
-- Comparing classical ML models with deep learning approaches.
-- Improving efficiency using lightweight methods.
-- Applying explainability techniques to highlight the most important health
-  factors.
-- Delivering a Streamlit web app for real-time risk prediction with
-  explanations.
-
----
-
-## Objectives
-
-- Preprocess and analyze the Pima Indians Diabetes dataset.
-- Build and evaluate baseline ML models and a deep learning model.
-- Improve model efficiency while maintaining strong predictive accuracy.
-- Apply SHAP and LIME for model interpretability.
-- Deploy the final model in a Streamlit app for interactive use.
+1. Develop a machine learning model to predict diabetes risk.
+2. Compare classical ML models (Logistic Regression, Random Forest, XGBoost)  
+   with deep learning approaches.
+3. Integrate explainable AI (XAI) methods such as SHAP and LIME for model
+   transparency.
+4. Apply explainability techniques to highlight the most influential health
+   factors driving predictions.
+5. Evaluate model performance and interpretability using standardized metrics.
+6. Deploy an interactive Streamlit app for user testing and visualization.
+7. Document the full data science lifecycle across milestones.
 
 ---
 
-## DatasetSource
+## DatasetSource 🌐
 
-**Source&nbsp;&nbsp;&nbsp;:** Pima Indians Diabetes Database (UCI). / openml.org and
+**Source&nbsp;&nbsp;&nbsp;:** Pima Indians Diabetes Database; Machine Learning  
+Repository (UCI), openML.org, and ResearchGate, [[Pima DataSet Link](  
+https://bit.ly/43TRitR)].  
 **Features:** 8 medical and lifestyle factors (e.g., Glucose, BMI, Age).  
 **Target&nbsp;&nbsp;&nbsp;&nbsp;:** Binary classification (Diabetes / No
 Diabetes).
 
 ---
 
-## Tech Stack
+## Tech Stack 🧠
 
 - **Languages &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:** Python
 - **Libraries&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:**
-    scikit-learn, TensorFlow/Keras,
-  XGBoost, SHAP, LIME, Streamlit, NumPy, Pandas, MatPlotLib, Seaborn
+    Pandas, Numpy, scikit-learn, TensorFlow/Keras, XGBoost, Explainable AI
+    (SHAP and LIME), Deployment (Streamlit), Visualization (MatPlotLib and
+    Seaborn)
 - **Environment&nbsp;&nbsp;&nbsp;&nbsp;:** JupyterNotebook + VS Code
 - **Version Control:** Git / GitHub
 
 ---
 
-## Project Milestones
+## Project Milestones 🚩
 
-**Milestone 1** — Problem Identification & Data Collection
+**Milestone 1** 📌 — Problem Identification & Data Collection
 
 *Objective:* \
 Define the problem, justify dataset selection, and perform a preliminary study  
- on diabetes prediction.
+on diabetes prediction.
 
 *Deliverables:*  
 
@@ -76,7 +75,7 @@ Define the problem, justify dataset selection, and perform a preliminary study
 - Dataset selection rationale
 - Description of data source (Pima Indians Diabetes dataset)
 
-**Milestone 2** — Data Exploration & Baseline Modeling  
+**Milestone 2** 🔍 — Data Exploration & Baseline Modeling  
 
 *Objective:*
 Explore data, visualize feature relationships, and build a baseline predictive
@@ -88,7 +87,7 @@ model.
 - Baseline logistic regression model
 - Performance metrics and confusion matrix
 
-**Milestone 3** — Explainable AI (XAI) Integration
+**Milestone 3** 🧭 — Explainable AI (XAI) Integration
 
 *Objective:*
 Implement and interpret model predictions using SHAP and LIME for transparency.
@@ -99,7 +98,7 @@ Implement and interpret model predictions using SHAP and LIME for transparency.
 - SHAP summary plots and LIME explanations
 - Discussion on interpretability insights
 
-**Milestone 4** — Model Tuning & Improvement
+**Milestone 4** ⚙️ — Model Tuning & Improvement
 
 *Objective:*
 
@@ -112,7 +111,7 @@ optimize model performance using hyperparameter tuning and ensemble methods
 - Comparative evaluation of baseline vs tuned models
 - Final model selection rationale
 
-**Milestone 5** — Deployment (Streamlit App)
+**Milestone 5** 🚀 — Deployment (Streamlit App)
 
 *Objective:*
 
@@ -125,14 +124,14 @@ and view diabetes risk predictions with SHAP/LIME visualizations.
 - Example user interface screenshots
 - Deployment guide
 
-**Milestone 6** — Final Report & Documentation
+**Milestone 6** 📁 — Final Report & Documentation
 
 *Objective:*
 
 Compile all results, findings, and visualizations into a cohesive final report  
 and presentation.
 
-*Deliverables:*
+*Deliverables:* 🎯
 
 - Comprehensive technical report
 - Slide deck for project defense
@@ -140,45 +139,90 @@ and presentation.
 
 ---
 
-## Repository Structure
+## Repository Structure 📁
 
-│── data/
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*# Raw & processed data*  
-│&nbsp;&nbsp;&nbsp;&nbsp;   └── pima.csv
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+|      Folder        | Description |
+|--------------------|--------------|
+| `data/`            | Raw dataset and data download scripts |
+| `models/`          | Trained models and scalers |
+| `notebooks/`       | Scratch notebooks for testing ideas |
+| `app/`             | Streamlit deployment app |
+| `milestones/`      | Organized project phases |
+| `.vscode/`         | VS Code configuration |
+| `requirements.txt` | List of dependencies |
 
-│── notebooks/  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp; *# Jupyter notebooks for analysis*  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 01_exploration.ipynb
+<!-- markdownlint-disable MD033 -->
 
-├── models/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*# Saved models and scalers*  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── xgb_final_model.joblib
+```text
 
-│── app/  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;*# Streamlit app code*  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── app.py  
-│── results/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-*# Metrics, plots, SHAP/LIME visuals*  
-│── src/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;*# Utility scripts (data prep, evaluation)*  
-│── README.md&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-*# Project overview*  
-│── requirements.txt&nbsp;&nbsp;&nbsp;&nbsp;  
-└── LICENSE
+diabetes-risk-xai/
+│
+├── README.md
+├── requirements.txt
+├── .gitignore
+├── LICENSE
+│
+├── data/
+│   ├── download_data.py
+│   ├── pima.csv
+│   └── .gitkeep
+│
+├── models/
+│   ├── xgb_final_model.joblib
+│   ├── logreg_baseline.joblib  
+│   ├── scaler.joblib
+│   └── .gitkeep
+│
+├── notebooks/
+│   └── exploratory_tests.ipynb
+│
+├── app/
+│   └── streamlit_app.py
+│
+├── milestones/
+│   ├── milestone1_problem_data/
+│   │   ├── milestone1.md
+│   │   ├── data_verification_report.md
+│   │   └── README.md
+│   │
+│   ├── milestone2_EDA_baseline/
+│   │   ├── milestone2.md
+│   │   ├── baseline_metrics.txt
+│   │   ├── notebooks/
+│   │   │   └── 01_exploration.ipynb
+│   │   └── README.md
+│   │
+│   ├── milestone3_xai/
+│   │   ├── milestone3.md
+│   │   ├── notebooks/
+│   │   │   └── 02_explainability.ipynb
+│   │   └── README.md
+│   │
+│   ├── milestone4_model_tuning/
+│   │   ├── milestone4.md
+│   │   ├── tuning_log.txt
+│   │   └── README.md
+│   │
+│   ├── milestone5_deployment/
+│   │   ├── milestone5.md
+│   │   ├── app/
+│   │   │   └── streamlit_app.py
+│   │   └── README.md
+│   │
+│   └── milestone6_final_report/
+│       ├── milestone6.md
+│       ├── final_presentation.pptx
+│       ├── final_report.pdf
+│       └── README.md
+│
+└── .vscode/
+    └── settings.json 
+
+```
+<!-- markdownlint-enable MD033 -->
 
 ---
 
-## Future Enhancements
-
-- Integrate more clinical datasets for improved generalization.
-- Explore federated learning to ensure data privacy.
-- Extend app with patient-specific treatment recommendations.
-
----
-
-## License
+## License 📜
 
 This project is licensed under the MIT License — free to use with attribution.
