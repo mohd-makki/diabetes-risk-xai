@@ -191,13 +191,13 @@ diabetes-risk-xai/
 │   │   ├── milestone2.md
 │   │   ├── baseline_metrics.txt
 │   │   ├── notebooks/
-│   │   │   └── 01_exploration.ipynb
+│   │   │   └── 01+02_exploration.ipynb
 │   │   └── README.md
 │   │
 │   ├── milestone3_xai/
 │   │   ├── milestone3.md
 │   │   ├── notebooks/
-│   │   │   └── 02_explainability.ipynb
+│   │   │   └── 03_explainability.ipynb
 │   │   └── README.md
 │   │
 │   ├── milestone4_model_tuning/
