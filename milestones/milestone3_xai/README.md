@@ -34,5 +34,5 @@ fairness and transparency in predictions.
 
 ## Output Location 📤
 
-- notebooks/02_explainability.ipynb
+- notebooks/03_explainability.ipynb
 - results/shap_summary.png, results/lime_explanations.png

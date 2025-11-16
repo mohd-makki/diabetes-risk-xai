@@ -1,0 +1,3 @@
+XAI Summary — key points
+Top features (by mean |SHAP|): ['Glucose', 'Insulin', 'BMI', 'DiabetesPedigree']
+Representative instances analysed: indices = [7, 3]

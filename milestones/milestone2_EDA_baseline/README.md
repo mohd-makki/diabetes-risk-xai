@@ -38,6 +38,6 @@ distributions and correlations with diabetes outcomes.
 
 ## Output Location 📤
 
-- notebooks/01_exploration.ipynb
+- notebooks/01+02_exploration.ipynb
 - The baseline models used in this phase are stored in the global models/  
   directory.
