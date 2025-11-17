@@ -177,10 +177,7 @@ diabetes-risk-xai/
 │
 ├── notebooks/
 │   └── exploratory_tests.ipynb
-│
-├── app/
-│   └── streamlit_app.py
-│
+││
 ├── milestones/
 │   ├── milestone1_problem_data/
 │   │   ├── milestone1.md
