@@ -1,0 +1,12 @@
+[MASTER]
+ignore = notebooks
+
+[FORMAT]
+max-line-length = 88
+
+[MESSAGES CONTROL]
+disable =
+    C0114,
+    C0115,
+    C0116,
+    R0903

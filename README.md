@@ -199,6 +199,8 @@ diabetes-risk-xai/
 │   │
 │   ├── milestone4_model_tuning/
 │   │   ├── milestone4.md
+│   │   ├── notebooks/
+│   │   │   └── 04_tuning.ipynb
 │   │   ├── tuning_log.txt
 │   │   └── README.md
 │   │

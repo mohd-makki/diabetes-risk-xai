@@ -1,0 +1,16 @@
+{
+  "top_features": [
+    "Glucose",
+    "BMI",
+    "Age",
+    "DiabetesPedigree",
+    "Pregnancies"
+  ],
+  "cases": [
+    13,
+    3
+  ],
+  "metrics": {
+    "accuracy": 0.7467532467532467
+  }
+}

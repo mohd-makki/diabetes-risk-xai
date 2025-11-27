@@ -1,0 +1,13 @@
+RandomizedSearchCV tuning log
+Run time: Thu Nov 27 23:52:39 2025
+Param distribution keys: ['n_estimators', 'max_depth', 'learning_rate', 'subsample', 'colsample_bytree', 'gamma', 'reg_alpha', 'reg_lambda']
+Best params: {'clf__colsample_bytree': np.float64(0.9438850493804799), 'clf__gamma': np.float64(4.254642243837564), 'clf__learning_rate': np.float64(0.29069049826628424), 'clf__max_depth': 6, 'clf__n_estimators': 153, 'clf__reg_alpha': np.float64(0.6064290596595899), 'clf__reg_lambda': np.float64(0.018394103233259296), 'clf__subsample': np.float64(0.5507357714330161)}
+Best CV recall: 0.6262458471760797
+Test metrics:
+{
+  "accuracy": 0.7337662337662337,
+  "precision": 0.6226415094339622,
+  "recall": 0.6111111111111112,
+  "f1": 0.616822429906542,
+  "roc_auc": 0.8225925925925927
+}

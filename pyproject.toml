@@ -1,0 +1,16 @@
+[tool.black]
+line-length = 88
+target-python = ['py310']
+
+[tool.ruff]
+line-length = 88
+extend-select = ["E", "F", "I"]
+ignore = ["E501"]
+exclude = ["milestones/*/notebooks"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
