@@ -173,6 +173,7 @@ diabetes-risk-xai/
 │   ├── xgb_final_model.joblib
 │   ├── logreg_baseline.joblib  
 │   ├── scaler.joblib
+│   ├── xgb_tuned.joblib
 │   └── .gitkeep
 │
 ├── notebooks/
@@ -180,6 +181,8 @@ diabetes-risk-xai/
 ││
 ├── milestones/
 │   ├── milestone1_problem_data/
+│   │   ├── research_question.md
+│   │   ├── domain_background.md
 │   │   ├── milestone1.md
 │   │   ├── data_verification_report.md
 │   │   └── README.md

@@ -1,16 +1,23 @@
-[tool.black]
-line-length = 88
-target-python = ['py310']
-
 [tool.ruff]
-line-length = 88
-extend-select = ["E", "F", "I"]
-ignore = ["E501"]
-exclude = ["milestones/*/notebooks"]
+# Code quality + import sorting + formatter
+line-length = 100
+target-version = "py310"
 
-[tool.ruff.lint]
-select = ["ALL"]
-ignore = ["E501"]
+# Do NOT check .ipynb files
+extend-exclude = [
+    "**/*.ipynb"
+]
 
-[tool.pytest.ini_options]
-pythonpath = ["."]
+# Enable important lint rules (safe for your project)
+lint.select = [
+    "E",   # Pyflakes & style errors
+    "F",   # Pyflakes
+    "W",   # Warnings
+    "I",   # Import sorting
+]
+
+[tool.ruff.format]
+# Use Ruff as the formatter
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"

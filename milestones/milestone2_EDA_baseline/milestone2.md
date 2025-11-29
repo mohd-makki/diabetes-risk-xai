@@ -4,58 +4,113 @@
 
 ## Objective 🎯
 
-This milestone focused on performing exploratory data analysis (EDA),
-preprocessing, and establishing baseline machine learning models for diabetes  
-risk prediction. The goal was to understand the dataset structure, identify  
-key patterns, and set a performance benchmark for future explainability and  
-optimization milestones.
+This milestone focuses on understanding the dataset, performing exploratory  
+data analysis (EDA), preprocessing, and establishing a strong baseline
+machine learning models for diabetes risk prediction; identifying important  
+characteristics, detecting issues, before moving into more advanced modeling  
+and interpretability (XAI).
+The goal was to understand the dataset structure, identify key patterns, and
+set a performance benchmark for future explainability and optimization
+milestones.
 
 ---
 
-## Dataset Overview 🧩
+## 1. Exploratory Data Analysis
 
-The dataset used was derived from the Pima Indians Diabetes Database,
-containing physiological and diagnostic attributes such as glucose, BMI, age,  
-and insulin levels.
+### 1.1 Data Overview
+
+   • Dataset shape, column names, data types\
+   • Distribution of numerical features\
+   • Class balance check (Diabetes vs. No Diabetes)\
+   • Summary statistics
+
+### 1.2 Data Cleaning & Preprocessing
+
+   • Handling missing values\
+   • Detecting outliers\
+   • Normalization/standardization decisions\
+   • Encoding categorical variables if required
+
+### 1.3 Visualization & Insights
+
+   • Histograms/kde plots for key features\
+   • Correlation heatmap\
+   • Boxplots for outlier inspection\
+   • Relationship plots: BMI vs. Outcome, Glucose vs. Outcome, Age vs.
+     Outcome, etc.
 
 ### Key EDA Findings 🔎
 
-- **Missing values:** Identified zero-valued entries in certain medical
-  variables (e.g., `Insulin`, `BloodPressure`), treated as missing and handled  
-  appropriately.  
-- **Class distribution:** Slight class imbalance with non-diabetic samples  
-  (~65%) dominating.  
-- **Correlations:** Strong positive correlation between `Glucose` and  
-  `Outcome`. Moderate correlations for `BMI` and `Age`.  
-- **Outliers:** Detected and visualized via boxplots; no removal was done at  
-  this stage to preserve data integrity.  
-- **Feature scaling:** Standardization was applied to numerical variables
-  using `StandardScaler` to stabilize model training.
+- **Missing values:** Some medical measurements (e.g., Insulin, BloodPressure)
+  contained zeros that are physiologically impossible. These were treated as
+  missing and handled during preprocessing.
+
+- **Class distribution:** Dataset shows mild imbalance — ~65% non-diabetic
+  vs. ~35% diabetic cases.
+
+- **Feature correlations:**
+
+  - Glucose shows the strongest positive correlation with diabetes outcome.
+
+  - BMI and Age show moderate correlation.
+
+- **Outliers:** Visible in variables like Glucose and BMI, confirmed via
+  boxplots. No removal was done to preserve the dataset’s integrity.
+
+- **Scaling:** Standardization using StandardScaler was applied to stabilize
+  model training and ensure fair comparison between models.
 
 ---
 
-## Baseline Model Development 🧮
+## 2. Baseline Model
 
-Three classifiers were trained using a standardized preprocessing pipeline.  
-Data was split into training and testing subsets (80/20) using
-`train_test_split` for consistent evaluation.
+### 2.1 Model Choice
+
+selecting a Logistic Regression model due to its:\
+   • Interpretability\
+   • Fast training\
+   • Suitability for baseline comparison
+
+### 2.2 Preprocessing for Baseline
+
+   • StandardScaler applied to numerical features\
+   • Train/validation split
+
+### 2.3 Baseline Performance
+
+Metrics:\
+   • Accuracy\
+   • Precision\
+   • Recall\
+   • F1-score\
+   • ROC-AUC
+
+**Important note:** The baseline is not expected to be highly optimized but
+should set a performance benchmark for future model improvements.
+
+**Baseline Model Development** 🧮
+
+Three classifiers were evaluated using a standardized preprocessing pipeline.  
+The dataset was split into 80/20 (train/test) using train_test_split.
 
 <!-- markdownlint-disable MD033 -->
 
 ```text
 
---------------------------------------------------------------------------
+-------------------------------------------------------------------------------
  Model               | Accuracy | ROC AUC | Key Notes
---------------------------------------------------------------------------
- Logistic Regression | 0.7078   | 0.8130  | Simple interpretable baseline,
-                     |          |         | used to establish performance floor
---------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+ Logistic Regression |          |         | Simple interpretable baseline,
+                     | 0.70780  | 0.8130  | used to establish performance
+                     |          |         | floor
+-------------------------------------------------------------------------------
  Random Forest       | 0.7468   | 0.8237  | Captured nonlinear relationships
                      |          |         | and improved recall
---------------------------------------------------------------------------
- XGBoost             | 0.7468   | 0.8281  | Consistent accuracy with better AUC
-                     |          |         | selected as final baseline model
---------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+ XGBoost             |          |         | Consistent accuracy with better 
+                     | 0.7468   | 0.8281  |    AUC selected as final baseline 
+                     |          |         |    model
+-------------------------------------------------------------------------------
 
 
 ```
@@ -63,39 +118,65 @@ Data was split into training and testing subsets (80/20) using
 
 ---
 
-## Baseline Model Rationale 🧠
+**Baseline Model Rationale** 🧠
 
-**Logistic Regression** was selected as the first baseline due to its
-simplicity, interpretability, and strong performance on tabular medical data.  
-Subsequent experiments with **Random Forest** and **XGBoost** provided
-comparative improvements in recall and AUC, highlighting the dataset’s
-nonlinear characteristics.
+The milestone initially focused on Logistic Regression due to its
+interpretability. However, additional experiments with Random Forest and
+XGBoost demonstrated better handling of nonlinear dynamics.
 
----
+➡ XGBoost was selected as the final baseline model.
 
-## Results Summary 📊
+**Why XGBoost Was Selected** 🧠
 
-- Best performing model: **XGBoost**
-- Accuracy: **0.7468**
-- ROC AUC: **0.8281**
-- Confusion Matrix (XGBoost):  
+- Demonstrated the highest AUC score.
+- Handled nonlinear relationships effectively.
+- More consistent predictive performance across metrics.
+- Provides explainability-friendly outputs for the next milestone (XAI).
 
-[[82 18]
+Best model: XGBoost
+Accuracy: 0.7468
+ROC AUC: 0.8281
+
+**Confusion Matrix (XGBoost)** \
+[[82 18] \
 [21 33]]
 
-- Both scaler and model artifacts were serialized using `joblib` and stored
-  in the root-level `models/` directory.
+**Artifacts Produced** 💾
+
+- baseline_metrics.txt — *detailed evaluation results*
+- logreg_baseline.joblib — *logistic regression model*
+- scaler.joblib — *fitted StandardScaler*
+- xgb_final_model.joblib — *selected baseline model*
+- 01+02_exploration.ipynb — *full EDA and baseline modeling code*
 
 ---
 
-## Artifacts 💾
+## 3. Summary
 
-- `baseline_metrics.txt` — Contains full model performance reports and
-  confusion matrices.  
-- `logreg_baseline.joblib`, `scaler.joblib`, `xgb_final_model.joblib` — Saved  
-  preprocessing and model artifacts located in `/models/`.  
-- `01_exploration.ipynb` — Jupyter notebook containing the complete workflow  
-  and code execution.
+Milestone 2 successfully:
+
+- Completed a full EDA.
+- Identified key predictive variables and data challenges.
+- Built and evaluated three baseline models.
+- Selected XGBoost as the strongest baseline classifier.
+- Produced serialized artifacts for future milestones.
+
+This provides a solid analytical foundation for Milestone 3 (XAI), where we  
+will begin interpreting model decisions using SHAP and other tools.
+
+---
+
+**Milestone Outcome:**  
+Established a solid preprocessing and baseline modeling foundation with the
+XGBoost classifier achieving the best trade-off between accuracy and ROC AUC.  
+These results will guide model interpretability in the next milestone.
+
+---
+
+**Milestone Outcome:**  
+Established a solid preprocessing and baseline modeling foundation with the
+XGBoost classifier achieving the best trade-off between accuracy and ROC AUC.  
+These results will guide model interpretability in the next milestone.
 
 ---
 
@@ -106,10 +187,4 @@ nonlinear characteristics.
 - Investigate feature importance and local explanations for individual
   predictions.  
 - Explore model fairness and sensitivity to data imbalance.
-
----
-
-**Milestone Outcome:**  
-Established a solid preprocessing and baseline modeling foundation with the
-XGBoost classifier achieving the best trade-off between accuracy and ROC AUC.  
-These results will guide model interpretability in the next milestone.
+  

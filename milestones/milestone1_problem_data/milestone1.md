@@ -23,6 +23,16 @@ techniques to ensure **accuracy, fairness, and transparency**.
 - Assess data quality, structure, and readiness for analysis.  
 - Identify potential challenges such as missing values, imbalance, or noise.
 
+---
+
+## Dataset Overview 🧩
+
+The dataset used was derived from the Pima Indians Diabetes Database,
+containing physiological and diagnostic attributes such as glucose, BMI, age,  
+and insulin levels.
+
+---
+
 ## 4. Dataset Summary 🗂️
 
 **Dataset:** Pima Indians Diabetes Database (`pima.csv`)  
