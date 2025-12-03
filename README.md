@@ -178,9 +178,16 @@ diabetes-risk-xai/
 │
 ├── notebooks/
 │   └── exploratory_tests.ipynb
-││
+│
 ├── milestones/
-│   ├── milestone1_problem_data/
+│   │
+│   ├── milestone0_repository_setup/
+│   │   ├── README.md
+│   │   ├── CONTRIBUTING.md
+│   │
+│   │
+│   ├── milestone1_problem_def(plus data collection)/
+│   │   ├── problem_statement.md
 │   │   ├── research_question.md
 │   │   ├── domain_background.md
 │   │   ├── milestone1.md

@@ -39,7 +39,8 @@ It includes:
 
 - Three baseline models were developed and evaluated
 - Model Accuracy ROC AUC Notes
-- Logistic Regression 0.7078 0.8130 Interpretable baseline; sets minimum  performance
+- Logistic Regression 0.7078 0.8130 Interpretable baseline; sets minimum  
+  performance
 - Random Forest 0.7468 0.8237 Captures nonlinear relationships
 - XGBoost 0.7468 0.8281 Strongest baseline; best AUC
 
@@ -63,7 +64,8 @@ It includes:
 
 ## Why This Milestone Matters 💡
 
-- This stage ensures the project has a reliable analytical foundation before introducing explainability or tuning:
+- This stage ensures the project has a reliable analytical foundation before
+  introducing explainability or tuning:
 - Confirms dataset quality
 - Reveals patterns supporting the research question
 - Defines baseline performance to compare future improvements
@@ -87,4 +89,5 @@ Permutation importance\
 Partial dependency plots\
 Local + global explanations\
 
-These insights will be crucial for communicating results to clinicians and non-technical audiences later in the project.
+These insights will be crucial for communicating results to clinicians and
+non-technical audiences later in the project.

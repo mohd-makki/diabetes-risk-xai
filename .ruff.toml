@@ -1,0 +1,7 @@
+# .ruff.toml
+extend-ignore = ["T201"] # allow print in notebooks and scripts if you prefer
+exclude = [
+    "milestones/**.ipynb",
+    "**/*.ipynb",
+    "milestones/milestone5_deployment/app/streamlit_app.py",
+]
