@@ -1,314 +1,287 @@
 # milestones/milestone5_deployment/app/streamlit_app.py
 """
-Milestone 5 Streamlit app: Diabetes Risk + XAI viewer
-
-this file at:
-milestones/milestone5_deployment/app/streamlit_app.py
-
-Run (from repo root):
-streamlit run milestones/milestone5_deployment/app/streamlit_app.py
+Streamlit app to demo Diabetes Risk XAI artifacts:
+- Loads the best available model (xgb_tuned -> xgb_final_model -> logreg_baseline)
+- Loads scaler if present
+- Shows prediction + probability + severity
+- Embeds SHAP/LIME HTML artifacts from the repository results/ folder
 """
 
-import json
 from pathlib import Path
-from typing import List, Optional
-
 import joblib
-import numpy as np
-import pandas as pd
+import json
+from typing import Optional, Dict
 import streamlit as st
 import streamlit.components.v1 as components
+import numpy as np
+import pandas as pd
 
 # -------------------------
-# Config / paths
+# Paths (robust)
 # -------------------------
-HERE = Path(__file__).resolve().parent
-REPO_ROOT = HERE.parents[3]  # moves up to repo root (diabetes_risk_xia)
+# File lives at: .../milestones/milestone5_deployment/app/streamlit_app.py
+REPO_ROOT = Path(__file__).resolve().parents[3]  # repo root
 MODELS_DIR = REPO_ROOT / "models"
 RESULTS_DIR = REPO_ROOT / "results"
-
-# --- Model filenames ---
-TUNED_MODEL = MODELS_DIR / "xgb_tuned.joblib"
-FINAL_MODEL = MODELS_DIR / "xgb_final_model.joblib"
-FALLBACK_MODEL = MODELS_DIR / "logreg_baseline.joblib"
-
-# --- Severity thresholds ---
-SEVERITY_THRESHOLDS = {
-    "low": 0.20,
-    "moderate": 0.50,  # p < 0.20 -> low; 0.20 <= p < 0.50 -> moderate; p >= 0.50 -> high
-}
-
-# --- Load model safely ---
-if TUNED_MODEL.exists():
-    model = joblib.load(TUNED_MODEL)
-elif FINAL_MODEL.exists():
-    model = joblib.load(FINAL_MODEL)
-elif FALLBACK_MODEL.exists():
-    model = joblib.load(FALLBACK_MODEL)
-else:
-    st.error(
-        "❌ No model available. Please place a model file in /models/ and restart the app."
-    )
-
-# Example: load scaler if needed
-scaler_path = MODELS_DIR / "scaler.joblib"
-if scaler_path.exists():
-    scaler = joblib.load(scaler_path)
-else:
-    scaler = None
-
-# Nice colors for severity
-SEVERITY_COLORS = {
-    "low": "#2ecc71",  # green
-    "moderate": "#f39c12",  # orange
-    "high": "#e74c3c",  # red
-}
+DATA_DIR = REPO_ROOT / "data"
 
 
 # -------------------------
-# Helpers
+# Helper utilities
 # -------------------------
-def safe_load_model() -> Optional[object]:
-    """Load the best available model (tuned -> final -> fallback)."""
-    if TUNED_MODEL.exists():
-        return joblib.load(TUNED_MODEL)
-    if FINAL_MODEL.exists():
-        return joblib.load(FINAL_MODEL)
-    if FALLBACK_MODEL.exists():
-        return joblib.load(FALLBACK_MODEL)
+def safe_load_joblib(p: Path):
+    if p.exists():
+        try:
+            return joblib.load(p)
+        except Exception as e:
+            st.warning(f"Failed to load {p.name}: {e}")
+            return None
     return None
 
 
-def list_html_artifacts(prefix: str) -> List[Path]:
-    """List HTML artifacts in results folder with given prefix."""
-    return sorted(list(RESULTS_DIR.glob(f"{prefix}*.html")))
+def find_best_model(models_dir: Path) -> Optional[Path]:
+    # priority list
+    candidates = [
+        "xgb_tuned.joblib",
+        "xgb_final_model.joblib",
+        "logreg_baseline.joblib",
+    ]
+    for name in candidates:
+        p = models_dir / name
+        if p.exists():
+            return p
+    # fallback: any .joblib in models dir
+    for p in models_dir.glob("*.joblib"):
+        return p
+    return None
 
 
-def render_html_file(p: Path, height: int = 400) -> None:
-    """Render an HTML artifact inside the app."""
+def list_html_artifacts(results_dir: Path, prefix: str):
+    return sorted(results_dir.glob(f"{prefix}*.html"))
+
+
+def list_png_artifacts(results_dir: Path, pattern: str):
+    return sorted(results_dir.glob(pattern))
+
+
+def severity_label(prob: float, thresholds: Dict[str, float]):
+    # thresholds: {"high":0.75, "moderate":0.5, "low":0.25}
+    if prob >= thresholds["high"]:
+        return "High", "🔴"
+    if prob >= thresholds["moderate"]:
+        return "Moderate", "🟠"
+    if prob >= thresholds["low"]:
+        return "Low", "🟡"
+    return "Minimal", "🟢"
+
+
+# -------------------------
+# App config
+# -------------------------
+st.set_page_config(page_title="Diabetes Risk (XAI) — Demo", layout="wide")
+st.title("Diabetes Risk Prediction — Explainable AI Demo")
+
+col1, col2 = st.columns([2, 1])
+
+# -------------------------
+# Load model & scaler
+# -------------------------
+with col2:
+    st.header("Model status")
+    model_path = find_best_model(MODELS_DIR)
+    scaler_path = MODELS_DIR / "scaler.joblib"
+
+    if model_path is None:
+        st.error(
+            "No model artifact found in models/ — please run Milestone pipelines and save model artifacts there."
+        )
+        st.stop()
+
+    model = safe_load_joblib(model_path)
+    scaler = safe_load_joblib(scaler_path)
+
+    st.success(f"Loaded model: {model_path.name}")
+    if scaler is not None:
+        st.info("Scaler loaded and will be applied to inputs.")
+    else:
+        st.info(
+            "No scaler found — raw inputs will be passed to the model (ensure consistent feature scale)."
+        )
+
+    # default feature names (common order for Pima dataset)
+    default_feature_names = [
+        "Pregnancies",
+        "Glucose",
+        "BloodPressure",
+        "SkinThickness",
+        "Insulin",
+        "BMI",
+        "DiabetesPedigree",
+        "Age",
+    ]
+    # Try to infer from model if possible
     try:
-        html = p.read_text(encoding="utf-8")
-        components.html(html, height=height, scrolling=True)
-    except (FileNotFoundError, OSError, ValueError) as e:
-        st.error(f"Unable to render {p.name}: {e}")
-
-
-def severity_bucket(probability: float) -> str:
-    """Map probability to a severity label: low/moderate/high."""
-    if probability < SEVERITY_THRESHOLDS["low"]:
-        return "low"
-    if probability < SEVERITY_THRESHOLDS["moderate"]:
-        return "moderate"
-    return "high"
-
-
-# -------------------------
-# App
-# -------------------------
-st.set_page_config(page_title="Diabetes Risk (XAI)", layout="wide")
-st.title("Diabetes Risk — Predict & Explain (XAI)")
-
-# Sidebar
-st.sidebar.header("Model & Artifacts")
-model = safe_load_model()
-if model:
-    st.sidebar.success(f"Loaded model: {model.__class__.__name__}")
-else:
-    st.sidebar.warning(
-        "No model found in /models/ (place xgb_tuned.joblib or "
-        "xgb_final_model.joblib)"
-    )
-
-st.sidebar.markdown(
-    "**Explainability artifacts** (saved by `03_explainability.ipynb`):"
-)
-shap_htmls = list_html_artifacts("shap_force")
-lime_htmls = list_html_artifacts("lime_case")
-pngs = sorted(list(RESULTS_DIR.glob("*.png")))
-
-if shap_htmls:
-    st.sidebar.markdown(f"- {len(shap_htmls)} SHAP force HTML(s) found")
-else:
-    st.sidebar.info("No SHAP force HTML artifacts found (run the XAI notebook)")
-
-if lime_htmls:
-    st.sidebar.markdown(f"- {len(lime_htmls)} LIME HTML(s) found")
-else:
-    st.sidebar.info("No LIME HTML artifacts found (run the XAI notebook)")
-if pngs:
-    st.sidebar.markdown(f"- {len(pngs)} static plot PNG(s) found")
-else:
-    st.sidebar.info("No static PNGs found in /results/")
-
-# Tabs
-tab1, tab2, tab3 = st.tabs(["Predict", "Explainability (XAI)", "About"])
-
-# ---------- Predict tab ----------
-with tab1:
-    st.header("Predict a single patient")
-
-    # Load example data (if available)
-    demo_df = None
-    pima_path = REPO_ROOT / "data" / "pima.csv"
-    if pima_path.exists():
-        try:
-            demo_df = pd.read_csv(pima_path).head(5)
-        except (
-            FileNotFoundError,
-            pd.errors.EmptyDataError,
-            pd.errors.ParserError,
-            OSError,
-        ):
-            demo_df = None
-
-    # Collect inputs (features)
-    st.markdown("Enter patient features (use reasonable clinical values):")
-    cols = st.columns(4)
-    # Expected features order: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin,
-    # BMI, DiabetesPedigree, Age
-    with cols[0]:
-        pregnancies = st.number_input("Pregnancies", min_value=0, max_value=20, value=1)
-        glucose = st.number_input(
-            "Glucose", min_value=0.0, max_value=300.0, value=120.0, step=1.0
-        )
-    with cols[1]:
-        bp = st.number_input(
-            "BloodPressure", min_value=0.0, max_value=200.0, value=70.0, step=1.0
-        )
-        skin = st.number_input(
-            "SkinThickness", min_value=0.0, max_value=100.0, value=20.0, step=1.0
-        )
-    with cols[2]:
-        insulin = st.number_input(
-            "Insulin", min_value=0.0, max_value=1000.0, value=79.0, step=1.0
-        )
-        bmi = st.number_input(
-            "BMI", min_value=0.0, max_value=100.0, value=25.0, step=0.1
-        )
-    with cols[3]:
-        dpf = st.number_input(
-            "DiabetesPedigree", min_value=0.0, max_value=10.0, value=0.5, step=0.01
-        )
-        age = st.number_input("Age", min_value=0, max_value=120, value=33)
-
-    if st.button("Predict risk"):
-        if model is None:
-            st.error(
-                "No model available. Place a model file in /models/ and restart the app."
-            )
+        if hasattr(model, "feature_names_in_"):
+            feature_names = list(model.feature_names_in_)
         else:
-            # Prepare input in the order used by the model
-            features = np.array(
-                [[pregnancies, glucose, bp, skin, insulin, bmi, dpf, age]], dtype=float
-            )
-            try:
-                # check if model expects scaled input (we assume saved scaler used in training)
-                # Prefer to read scaler from models dir if available
-                scaler_path = MODELS_DIR / "scaler.joblib"
-                if scaler_path.exists():
-                    scaler = joblib.load(scaler_path)
-                    features_scaled = scaler.transform(
-                        pd.DataFrame(
-                            features,
-                            columns=[
-                                "Pregnancies",
-                                "Glucose",
-                                "BloodPressure",
-                                "SkinThickness",
-                                "Insulin",
-                                "BMI",
-                                "DiabetesPedigree",
-                                "Age",
-                            ],
-                        )
-                    )
-                else:
-                    # fallback: feed raw (model might handle internally)
-                    features_scaled = features
-            except (FileNotFoundError, OSError, ValueError, AttributeError):
-                features_scaled = features
+            feature_names = default_feature_names
+    except Exception:
+        feature_names = default_feature_names
 
-            prob = float(model.predict_proba(features_scaled)[:, 1][0])
-            pred_label = int(prob >= 0.5)
-            sev = severity_bucket(probability=prob)
-            color = SEVERITY_COLORS[sev]
+    st.write("Feature order used:", feature_names)
 
-            st.metric("Predicted probability (class=1)", f"{prob:.3f}")
-            st.markdown(f"**Predicted label:** {pred_label}")
-            severity_html = (
-                f"**Severity:** <span style='color:{color};font-weight:700'>"
-                f"{sev.upper()}</span>"
-            )
-            st.markdown(severity_html, unsafe_allow_html=True)
+# -------------------------
+# Severity thresholds (customizable)
+# -------------------------
+SEVERITY_THRESHOLDS = {"high": 0.75, "moderate": 0.50, "low": 0.25}
 
-            # Offer download of a minimal JSON containing the result
-            out = {"probability": prob, "label": pred_label, "severity": sev}
-            st.download_button(
-                "Download result (JSON)",
-                json.dumps(out, indent=2),
-                file_name="prediction_result.json",
-            )
+# -------------------------
+# Prediction UI
+# -------------------------
+with col1:
+    st.header("Predict a sample")
+    st.markdown("Enter feature values (use realistic clinical ranges).")
 
-# ---------- Explainability tab ----------
-with tab2:
-    st.header("Explainability artifacts (SHAP / LIME)")
+    # Build a form for inputs
+    with st.form("predict_form"):
+        inputs = {}
+        for feat in feature_names:
+            # choose sensible defaults
+            if feat.lower().startswith("preg"):
+                val = st.number_input(
+                    feat, min_value=0.0, max_value=20.0, value=0.0, step=1.0
+                )
+            elif feat.lower() in ("age",):
+                val = st.number_input(
+                    feat, min_value=0.0, max_value=120.0, value=30.0, step=1.0
+                )
+            elif feat.lower() in (
+                "glucose",
+                "bloodpressure",
+                "skin thickness",
+                "insulin",
+                "bmi",
+            ):
+                val = st.number_input(feat, min_value=0.0, max_value=1000.0, value=50.0)
+            else:
+                val = st.number_input(feat, value=0.0)
+            inputs[feat] = float(val)
+        submitted = st.form_submit_button("Predict")
 
-    # SHAP force HTML viewer
-    st.subheader("SHAP force plots (interactive)")
+    if submitted:
+        X_in = pd.DataFrame([inputs])[feature_names]  # ensure ordering
+        # apply scaler if available
+        try:
+            if scaler is not None:
+                X_proc = scaler.transform(X_in)
+            else:
+                X_proc = X_in.values
+        except Exception as e:
+            st.error(f"Error applying scaler: {e}")
+            X_proc = X_in.values
+
+        # Predict
+        try:
+            # handle classifiers with predict_proba or decision_function
+            if hasattr(model, "predict_proba"):
+                proba = model.predict_proba(X_proc)[0, 1]
+            elif hasattr(model, "predict"):
+                # fallback: model.predict may give class label; attempt decision_function then sigmoid
+                pred_raw = model.predict(X_proc)[0]
+                proba = float(pred_raw)
+            else:
+                st.error("Model does not support probability predictions.")
+                proba = 0.0
+
+            label, icon = severity_label(proba, SEVERITY_THRESHOLDS)
+            st.metric("Predicted risk (probability)", f"{proba:.3f}")
+            st.markdown(f"**Severity**: {icon} **{label}**")
+        except Exception as e:
+            st.error(f"Prediction failed: {e}")
+
+# -------------------------
+# Show available XAI artifacts
+# -------------------------
+st.subheader("Explainability artifacts (from results/)")
+col_a, col_b = st.columns(2)
+
+# SHAP force HTMLs
+shap_htmls = list_html_artifacts(RESULTS_DIR, "shap_force_case_")
+lime_htmls = list_html_artifacts(RESULTS_DIR, "lime_case_")
+shap_pngs = list_png_artifacts(RESULTS_DIR, "shap_summary_*.png")
+other_pngs = list_png_artifacts(RESULTS_DIR, "*.png")
+
+with col_a:
+    st.markdown("#### SHAP force plots (interactive)")
     if shap_htmls:
-        shap_choice = st.selectbox(
-            "Select SHAP force plot", [p.name for p in shap_htmls]
-        )
-        selected = RESULTS_DIR / shap_choice
-        render_html_file(selected, height=450)
-        st.download_button(
-            "Download HTML", data=selected.read_bytes(), file_name=selected.name
-        )
+        choices = [p.name for p in shap_htmls]
+        pick = st.selectbox("Choose SHAP force HTML", choices, key="shap_force")
+        if pick:
+            path = RESULTS_DIR / pick
+            try:
+                html = path.read_text(encoding="utf-8")
+                components.html(html, height=420, scrolling=True)
+            except Exception as e:
+                st.error(f"Failed to load {pick}: {e}")
     else:
         st.info(
-            "No SHAP force HTML found. Run the XAI notebook to generate HTML artifacts "
-            "(03_explainability.ipynb)."
+            "No SHAP force HTML files found in results/ (e.g. shap_force_case_3.html)"
         )
 
-    # LIME HTML viewer
-    st.subheader("LIME explanations (HTML)")
+with col_b:
+    st.markdown("#### LIME HTML outputs")
     if lime_htmls:
-        lime_choice = st.selectbox(
-            "Select LIME file", [p.name for p in lime_htmls], key="lime_choice"
-        )
-        selected_lime = RESULTS_DIR / lime_choice
-        render_html_file(selected_lime, height=450)
-        st.download_button(
-            "Download LIME HTML",
-            data=selected_lime.read_bytes(),
-            file_name=selected_lime.name,
-        )
+        choices = [p.name for p in lime_htmls]
+        pick = st.selectbox("Choose LIME HTML", choices, key="lime")
+        if pick:
+            path = RESULTS_DIR / pick
+            try:
+                html = path.read_text(encoding="utf-8")
+                components.html(html, height=420, scrolling=True)
+            except Exception as e:
+                st.error(f"Failed to load {pick}: {e}")
     else:
-        st.info(
-            "No LIME HTML found. Run the XAI notebook to generate LIME artifacts "
-            "(03_explainability.ipynb)."
-        )
+        st.info("No LIME HTML files found in results/ (e.g. lime_case_3.html)")
 
-    # Static PNGs (optional)
-    st.subheader("Saved PNG visualizations (static)")
-    if pngs:
-        sel_png = st.selectbox("Select PNG", [p.name for p in pngs], key="png_choice")
-        st.image(RESULTS_DIR / sel_png)
-        st.download_button(
-            "Download PNG", data=(RESULTS_DIR / sel_png).read_bytes(), file_name=sel_png
-        )
-    else:
-        st.info("No static report PNGs found in /results/")
+# Static PNGs (SHAP summary / calibration)
+st.markdown("#### Static images (summary plots)")
+if shap_pngs:
+    for p in shap_pngs:
+        st.image(str(p), caption=p.name)
+elif other_pngs:
+    for p in other_pngs:
+        st.image(str(p), caption=p.name)
+else:
+    st.info("No PNG artifacts found in results/")
 
-# ---------- About ----------
-with tab3:
-    st.header("About this app")
-    st.markdown(
-        "This app shows model predictions and pre-computed explainability artifacts "
-        "(SHAP force HTML, LIME HTML) generated by the XAI notebook "
-        "(`03_explainability.ipynb`). Artifacts must exist in the repository `results/` folder."
+# -------------------------
+# Show metadata & summary
+# -------------------------
+meta_path = RESULTS_DIR / "xai_metadata.json"
+if meta_path.exists():
+    try:
+        meta = json.loads(meta_path.read_text(encoding="utf-8"))
+        st.sidebar.header("XAI metadata")
+        st.sidebar.json(meta)
+    except Exception:
+        st.sidebar.text("Failed to read xai_metadata.json")
+
+# quick download of summary text if exists
+summary_txt = RESULTS_DIR / "xai_summary.txt"
+if summary_txt.exists():
+    with open(summary_txt, "r", encoding="utf-8") as f:
+        text = f.read()
+    st.markdown("#### XAI Summary")
+    st.text(
+        text[:1000]
+        + (
+            "...\n(see full summary in results/xai_summary.txt)"
+            if len(text) > 1000
+            else ""
+        )
     )
-    st.markdown(
-        "**Important:** This application is for demonstration and educational purposes only. "
-        "Do not use it for clinical decision-making without proper validation."
-    )
+
+st.markdown("---")
+st.caption(
+    f"Repo root: {REPO_ROOT} — Models dir: {MODELS_DIR} — Results dir: {RESULTS_DIR}"
+)
