@@ -23,20 +23,39 @@ import streamlit.components.v1 as components
 # Config / paths
 # -------------------------
 HERE = Path(__file__).resolve().parent
-REPO_ROOT = HERE.parents[3]  # moves up to repo root (diabetes-risk-xai)
+REPO_ROOT = HERE.parents[3]  # moves up to repo root (diabetes_risk_xia)
 MODELS_DIR = REPO_ROOT / "models"
 RESULTS_DIR = REPO_ROOT / "results"
 
-# Model filenames: prefer tuned model if present
+# --- Model filenames ---
 TUNED_MODEL = MODELS_DIR / "xgb_tuned.joblib"
 FINAL_MODEL = MODELS_DIR / "xgb_final_model.joblib"
-FALLBACK_MODEL = MODELS_DIR / "logreg_baseline.joblib"  # optional fallback
+FALLBACK_MODEL = MODELS_DIR / "logreg_baseline.joblib"
 
-# Severity thresholds (modifiable)
+# --- Severity thresholds ---
 SEVERITY_THRESHOLDS = {
     "low": 0.20,
     "moderate": 0.50,  # p < 0.20 -> low; 0.20 <= p < 0.50 -> moderate; p >= 0.50 -> high
 }
+
+# --- Load model safely ---
+if TUNED_MODEL.exists():
+    model = joblib.load(TUNED_MODEL)
+elif FINAL_MODEL.exists():
+    model = joblib.load(FINAL_MODEL)
+elif FALLBACK_MODEL.exists():
+    model = joblib.load(FALLBACK_MODEL)
+else:
+    st.error(
+        "❌ No model available. Please place a model file in /models/ and restart the app."
+    )
+
+# Example: load scaler if needed
+scaler_path = MODELS_DIR / "scaler.joblib"
+if scaler_path.exists():
+    scaler = joblib.load(scaler_path)
+else:
+    scaler = None
 
 # Nice colors for severity
 SEVERITY_COLORS = {
