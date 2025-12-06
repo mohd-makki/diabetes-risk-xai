@@ -1,4 +1,54 @@
-# Milestone 5 🚀 — Deployment & Streamlit App
+# Milestone 5 🚀 - Deployment & Streamlit App/
+
+## Evaluation & Results Communication
+
+This directory contains all deliverables for Milestone 5 of the *Diabetes-Risk-XAI* project.  
+The milestone focuses on:
+
+- Evaluating the trained model
+- Performing detailed validation analysis
+- Conducting interpretability (XAI) checks
+- Preparing communication materials for stakeholders
+- Summarizing findings for both technical and non-technical audiences
+
+---
+
+## Included Files
+
+### 1. `milestone5.md`  
+
+Primary milestone documentation summarizing:
+
+- Evaluation methodology  
+- Performance metrics  
+- Error analysis  
+- Interpretability results  
+- Communication strategy  
+
+### 2. `evaluation_report.md`  
+
+A detailed and expanded version of the evaluation results, including charts, tables, and deeper model diagnostics.
+
+### 3. `communication_results.md`  
+
+A communication-focused document presenting the milestone’s results in a clear, structured, and presentation-ready format.
+
+### 4. `stakeholder_summary.md`  
+
+A non-technical explanation of the project results and real-world relevance.
+
+---
+
+## Purpose of Milestone 5
+
+This milestone verifies that the model is:
+
+- reliable  
+- explainable  
+- ready for real-world use  
+- supported by strong communication materials  
+
+It prepares the project for final packaging and deployment in Milestone 6.
 
 This directory contains the Streamlit deployment for the Diabetes Risk XAI
 project.

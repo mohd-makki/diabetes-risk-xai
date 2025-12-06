@@ -28,11 +28,7 @@ implications and limitations.
 
 - final_report.pdf
 - presentation_slides.pptx
+- project_presentation.mp4 (video)
 - Updated project documentation and GitHub README.
 
 ---
-
-## Output Location 📤
-
-- reports/
-- Root-level README.md
