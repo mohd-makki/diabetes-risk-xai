@@ -216,13 +216,20 @@ diabetes-risk-xai/
 │   │
 │   ├── milestone5_deployment/
 │   │   ├── milestone5.md
+│   │   ├── communication_results.md
+│   │   ├── evaluation_report.md
+│   │   ├── stakeholder_summary.md
 │   │   ├── app/
 │   │   │   └── streamlit_app.py
 │   │   └── README.md
 │   │
 │   └── milestone6_final_report/
 │       ├── milestone6.md
-│       ├── final_presentation.pptx
+│       ├── final_presentation_slides.pptx
+│       ├── final_presentation_video.mp4
+│       ├── presentation_2.5_minutes_audio.mp3
+│       ├── stakeholder_summary_final.md
+│       ├── executive_summary_report.pdf (one page)
 │       ├── final_report.pdf
 │       └── README.md
 │
