@@ -1,6 +1,7 @@
-# Diabetes Risk Prediction with Explainable AI (XAI) 🩺
+# 📌 Diabetes Risk Prediction with Explainable AI (XAI) 🩺
 
-Efficient and explainable AI for diabetes risk prediction (capstone project).
+A complete end-to-end machine-learning project with transparency, clinical
+alignment, and deployment-ready features.
 
 ---
 
@@ -13,7 +14,7 @@ users to input data and view diabetes risk predictions
 
 ---
 
-## 🚀 Try the App
+## 🚀 Live Application: Go try it
 
 [![Open in Streamlit](
 https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://diabetes-risk-xai-cuxn9elwmgaukdbnbfmq65.streamlit.app/)
@@ -22,28 +23,36 @@ https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dia
 
 ## Project Overview 🧭
 
-This project aims to build an interpretable machine learning system that
-predicts the risk of diabetes based on clinical data.
-the project combines predictive models (Logistic Regression, Random Forest,
-XGBoost) with Explainable AI (XAI) techniques such as **SHAP** and **LIME**
-to help clinicians understand *why* predictions are made. the goal is not only  
-to achieve accurate predictions but also to make model decisions transparent  
-and understandable for healthcare professionals and patients.
-The project is developed to demonstrate end-to-end AI model development,  
-from data collection to real-world deployment.
+This project develops a fully explainable machine-learning system that predicts
+an individual’s likelihood of having diabetes while providing clear,
+human-interpretable explanations for every prediction.
+Using the Pima Indians Diabetes Dataset, the system integrates:
+
+- Robust preprocessing and data validation
+- EDA & baseline modeling
+- Hyperparameter tuning (XGBoost)
+- Explainability with SHAP & LIME
+- A deployed Streamlit application
+- Milestone-based documentation replicating professional workflows
+
+The goal is to support early detection, clinical decision-making, and
+public-health screening with a model that is not only accurate but also
+transparent and trustworthy.
 
 ## Project Objectives 🎯
 
-1. Develop a machine learning model to predict diabetes risk.
-2. Compare classical ML models (Logistic Regression, Random Forest, XGBoost)  
-   with deep learning approaches.
-3. Integrate explainable AI (XAI) methods such as SHAP and LIME for model
-   transparency.
+1. Build a reproducible, research-grade ML pipeline.
+2. Develop a high-performance, clinically meaningful, a machine learning model
+   to predict diabetes risk.
+3. Produce global + local explainability artifacts, integrate explainable
+   AI (XAI) methods (SHAP and LIME) for model transparency.
 4. Apply explainability techniques to highlight the most influential health
    factors driving predictions.
 5. Evaluate model performance and interpretability using standardized metrics.
-6. Deploy an interactive Streamlit app for user testing and visualization.
+6. Deploy an interactive, user-friendly web app, this interactive Streamlit app
+   for user testing and visualization.
 7. Document the full data science lifecycle across milestones.
+8. Deliver a final report and executive/stakeholder-facing summary
 
 ---
 
@@ -155,7 +164,7 @@ and presentation.
 | `data/`            | Raw dataset and data download scripts |
 | `models/`          | Trained models and scalers |
 | `notebooks/`       | Scratch notebooks for testing ideas |
-| `app/`             | Streamlit deployment app |
+| `results`          | place for final outputs |
 | `milestones/`      | Organized project phases |
 | `.vscode/`         | VS Code configuration |
 | `requirements.txt` | List of dependencies |
@@ -248,8 +257,126 @@ diabetes-risk-xai/
 ```
 <!-- markdownlint-enable MD033 -->
 
+**Each milestone includes its own README + documentation for clear traceability.**
+
 ---
 
-## License 📜
+## 📄 Final Report & Summary
 
-This project is licensed under the MIT License — free to use with attribution.
+- Full Final Report (PDF): [**Click Here for Final Report**](https://github.com/mohd-makki/diabetes-risk-xai/blob/main/milestones/milestone6_final_report/Final%20Report.pdf)
+- One-Page Executive Summary: [**One Page Executive Summary is Here**](https://github.com/mohd-makki/diabetes-risk-xai/blob/main/milestones/milestone6_final_report/executive_summary.pdf)
+
+---
+
+## ⚙️ Setup & Reproduction Instructions
+
+The following steps allow anyone to reproduce the entire project environment and run the application locally.
+
+1️⃣ Clone the Repository:\
+git clone <https://github.com/mohd-makki/diabetes-risk-xai.git>\
+cd diabetes-risk-xai
+
+2️⃣ Create & Activate Python Environment:\
+
+```bash
+python -m venv venv\
+source venv/bin/activate     # *MacOS / Linux*
+venv\Scripts\activate        # *Windows*
+
+3️⃣ Install Project Dependencies
+This repository uses a frozen requirements.txt to ensure full reproducibility.
+
+pip install -r requirements.txt
+
+4️⃣ Explore the Notebooks
+
+All exploration, modeling, XAI, and tuning steps are inside:
+
+notebooks/
+milestones/*/notebooks/
+
+You can launch them with:
+
+jupyter notebook
+
+5️⃣ Run the Streamlit Application Locally:
+streamlit run milestones/milestone5_deployment/app/streamlit_app.py
+```
+
+## 📊 Key Deliverables
+
+- ✔ Complete milestone-based project structure
+- ✔ Data validation + EDA
+- ✔ Baseline models
+- ✔ Tuned XGBoost model
+- ✔ SHAP summary + force plots
+- ✔ LIME explanations
+- ✔ Calibration curve
+- ✔ Full model metrics
+- ✔ Streamlit deployment
+- ✔ Final report + one-page executive summary
+
+## 🧠 Model Performance (Summary)
+
+```bash
+──────────────────────────────────────────────
+| Model              |Accuracy | Recall | AUC  |
+|──────────────────────────────────────────────|
+| Logistic Regression|    …    |   …    |  …   |
+|──────────────────────────────────────────────|
+| Random Forest      |    …    |   …    |  …   |
+|──────────────────────────────────────────────|
+| XGBoost (Tuned)    |   Best  |  Best  | Best |
+|──────────────────────────────────────────────
+```
+
+(See full metrics in results/ and milestone reports.)
+
+## 🔎 Explainability Highlights
+
+- SHAP identifies glucose as the strongest global predictor
+- BMI and Age follow as highly influential
+- Local SHAP force plots show patient-specific risk explanations
+- LIME clarifies individual model decisions for interpretability
+- Results align with clinical expectations
+- SHAP and LIME artifacts are stored in:
+results/
+
+## 📈 Project Workflow (High-Level)
+
+Repository Setup\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ↓\
+Data Acquisition\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ↓\
+Data Validation & Preprocessing\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ↓\
+Exploratory Data Analysis\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ↓\
+Modeling (Baseline → Optimized)\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ↓\
+Explainability (SHAP + LIME)\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ↓\
+Model Tuning (XGBoost)\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ↓\
+Deployment (Streamlit App)\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        ↓\
+Final Report & Stakeholder(Executive) Summary\
+
+## 🌍 Future Work
+
+- Validate model with real clinical datasets
+- Integrate Electronic Health Records (EHRs)
+- Add multilingual UI (Arabic, Somali, Swahili)
+- Deploy API for hospitals/clinics
+- Improve calibration for clinical thresholds
+- Extend dataset with demographics and lifestyle features
+
+## 🤝 Contribution Guidelines
+
+See:
+milestones/milestone0_repository_setup/CONTRIBUTING.md
+
+## 📜 License
+
+This project is released under the MIT License.\
+See: LICENSE
