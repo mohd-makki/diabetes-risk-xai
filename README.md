@@ -4,17 +4,19 @@ Efficient and explainable AI for diabetes risk prediction (capstone project).
 
 ---
 
-## 🚀 Try the App
-
-[![Open in Streamlit](
-https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://diabetes-risk-xai-cuxn9elwmgaukdbnbfmq65.streamlit.app/)
-
----
-
 This repository hosts my capstone project for the Computer and Data Science
 program at MIT.
 The project develops machine learning and deep learning models to predict
 diabetes risk, with a focus on efficiency and explainability.
+The goal is to develop an interactive Streamlit web application that enables
+users to input data and view diabetes risk predictions
+
+---
+
+## 🚀 Try the App
+
+[![Open in Streamlit](
+https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://diabetes-risk-xai-cuxn9elwmgaukdbnbfmq65.streamlit.app/)
 
 ---
 
