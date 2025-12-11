@@ -1,4 +1,4 @@
-# Executive / Stakeholder Summary 
+# Executive / Stakeholder Summary
 
 ## Diabetes Risk XAI Project
 

@@ -107,3 +107,83 @@ with minimal config.
   debugging. Production code (this app) avoids noisy prints.
 
 ---
+
+## Project Artifacts
+
+Milestone 5 consolidates all public-facing outputs of the project. These
+artifacts demonstrate the functionality, explainability, and reproducibility
+of the diabetes-risk prediction system.
+
+### 🔹 Deployed Streamlit Application
+
+- An interactive web app that allows users to:
+- Enter patient clinical features
+- Generate real-time diabetes-risk predictions
+- View SHAP-based explainability visualizations
+- Access model decision interpretations
+- App URL: [**Streamlit**](
+  https://diabetes-risk-xai-cuxn9elwmgaukdbnbfmq65.streamlit.app/)
+
+### 🔹 XAI Visualizations
+
+These explainability assets help stakeholders understand how and why the model makes its predictions:
+
+- SHAP Summary (Beeswarm) Plot – global feature influence
+- SHAP Summary (Bar) Plot – ranked feature importance
+- SHAP Force Plots – individualized prediction explanations
+- LIME Case Explanations – local interpretability for selected records
+
+Artifacts location:\
+results/
+
+### 🔹 Model Artifacts
+
+All trained models used in this study, stored for reproducibility, auditing, and future development:
+
+- xgb_final_model.joblib
+- logreg_baseline.joblib
+- xgb_tuned.joblib
+- scaler.joblib
+
+Artifacts location:\
+models/
+
+### 🔹 Evaluation Outputs
+
+Performance summaries generated across multiple milestones:
+
+- Baseline metrics
+- Tuned model metrics
+- Calibration curve
+- XAI summary reports
+
+Artifacts location:\
+results/
+
+### 🔹 Technical Notebooks
+
+Reproducible Jupyter notebooks that document the analysis and modeling pipeline:
+
+- EDA & Baseline Modeling: milestone2/notebooks/01+02_exploration.ipynb
+- Explainability: milestone3/notebooks/03_explainability.ipynb
+- Model Tuning: milestone4/notebooks/04_tuning.ipynb
+
+### 🔹 Final Report & Supporting Documents
+
+- Comprehensive final report (PDF)
+- Executive one-page summary (PDF)
+- Executive (Stakeholder) summary
+- Presentation slides (pptx)
+- Presentation (video)
+- Presentation 2.5 minutes (audio)
+
+Artifacts location:\
+milestone6_final_report/
+
+### 🔹 Source Code for Deployment
+
+The full Streamlit application implementation:
+
+```bash
+milestone5_deployment/app/streamlit_app.py
+```
